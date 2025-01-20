@@ -20,8 +20,8 @@ services:
     networks:
       - default
       - grafana
-    volumes:
-      - ./data:/var/lib/grafana:rw
+    # volumes:
+    #   - ./data:/var/lib/grafana:rw
     environment:
       - GF_SERVER_ROOT_URL=http://grafana.local.io/
       - GF_LOG_LEVEL=debug
@@ -31,6 +31,9 @@ services:
       - GF_USERS_AUTO_ASSIGN_ORG_ROLE=Viewer
       - GF_USERS_AUTO_ASSIGN_ORG=true
       - GF_USERS_AUTO_ASSIGN_ROLE=Viewer
-      - GF_USERS_DEFAULT_THEME=light
+      - GF_USERS_DEFAULT_THEME=dark
       - GF_USERS_VIEWERS_CAN_EDIT=false
       - GF_USERS_VIEWERS_CAN_SAVE
+    #   - GF_DATABASE_URL=postgres://grafana:secret@grafana-db:5432/grafana?sslmode=disable
+    # depends_on:
+    #   - grafana-db
