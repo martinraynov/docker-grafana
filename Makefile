@@ -7,7 +7,7 @@ help: ## Prints this help message
 ######################
 ### MAIN FUNCTIONS ###
 ######################
-SERVICE=SERVICE_NAME_TOCHANGE
+SERVICE=grafana
 
 .PHONY: start
 start: ## Start the SERVICE docker container

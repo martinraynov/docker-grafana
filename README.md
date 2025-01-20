@@ -1,2 +1,3 @@
-# mra-template
-Base template for Projects
+# Grafana Instance
+
+Grafana instance running on docker
