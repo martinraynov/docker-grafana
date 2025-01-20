@@ -1,0 +1,36 @@
+networks:
+  default:
+    external: true
+    name: lb-common
+  grafana:
+    external: false
+    name: grafana
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.local.io`)"
+      - "traefik.http.routers.grafana.service=svc_grafana"
+      - "traefik.http.services.svc_grafana.loadbalancer.server.port=3000"
+    networks:
+      - default
+      - grafana
+    volumes:
+      - ./data:/var/lib/grafana:rw
+    environment:
+      - GF_SERVER_ROOT_URL=http://grafana.local.io/
+      - GF_LOG_LEVEL=debug
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_USERS_ALLOW_ORG_CREATE=false
+      - GF_USERS_AUTO_ASSIGN_ORG_ROLE=Viewer
+      - GF_USERS_AUTO_ASSIGN_ORG=true
+      - GF_USERS_AUTO_ASSIGN_ROLE=Viewer
+      - GF_USERS_DEFAULT_THEME=light
+      - GF_USERS_VIEWERS_CAN_EDIT=false
+      - GF_USERS_VIEWERS_CAN_SAVE
