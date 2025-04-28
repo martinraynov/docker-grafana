@@ -1,2 +1,4 @@
 tmp/
+docker/data/*
+!docker/data/.gitkeep
 .vscode
